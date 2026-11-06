@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+!.env.example
+
+# Runtime data
+backend/data/*.db
+
+# Misc
+guide.md
+.streamlit

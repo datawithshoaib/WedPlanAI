@@ -1,0 +1,48 @@
+[project]
+name = "wedplanner"
+version = "0.2.0"
+description = "Multi-agent wedding planning API (FastAPI + LangChain + Groq + Tavily)."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.53.0",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.10",
+    "langchain>=1.3.18",
+    "langchain-groq>=1.1.3",
+    "tavily-python>=0.8.3",
+]
+
+[project.optional-dependencies]
+# The original Streamlit UI, kept for reference: `uv run --extra streamlit streamlit run legacy/streamlit_app.py`
+streamlit = ["streamlit>=1.57.0"]
+
+[project.scripts]
+wedplanner = "wedplanner.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4",
+    "httpx>=0.28",
+    "ruff>=0.13",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wedplanner"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["legacy"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]  # line length is handled by `ruff format`
